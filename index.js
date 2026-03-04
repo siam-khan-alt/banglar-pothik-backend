@@ -25,6 +25,7 @@ async function run() {
     const divisionscollection = db.collection("divisions")
     const districtsCollection = db.collection("districts");
     const upazilasCollection = db.collection("upazilas");
+    const unionsCollection = db.collection("unions");
 
 
     await client.db("admin").command({ ping: 1 });
@@ -45,6 +46,11 @@ app.get('/districts', async (req, res) => {
 app.get('/upazilas',  async (req, res) => {
   const upazilas = await upazilasCollection.find().toArray();
   res.send(upazilas);
+});
+
+app.get('/unions',  async (req, res) => {
+  const unions = await unionsCollection.find().toArray();
+  res.send(unions);
 });
 
 
