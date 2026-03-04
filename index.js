@@ -23,6 +23,7 @@ async function run() {
 
     const db = client.db("banglar_pothik");
     const divisionscollection = db.collection("divisions")
+    const districtsCollection = db.collection("districts");
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
     app.get('/', (req, res) => {
@@ -31,6 +32,10 @@ async function run() {
 
 app.get('/divisions', async (req, res) => {
   const divisions = await divisionscollection.find().toArray();
+  res.send(divisions);
+});
+app.get('/districts', async (req, res) => {
+  const divisions = await districtsCollection.find().toArray();
   res.send(divisions);
 });
 
