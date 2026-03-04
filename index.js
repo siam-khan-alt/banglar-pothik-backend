@@ -20,17 +20,26 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
+
+    const db = client.db("banglar_pothik");
+    const divisionscollection = db.collection("divisions")
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
     app.get('/', (req, res) => {
   res.send('Hello banglar pothik!')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.get('/divisions', async (req, res) => {
+  const divisions = await divisionscollection.find().toArray();
+  res.send(divisions);
+});
+
+
   } finally {
     // await client.close();
   }
 }
 run().catch(console.dir);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
