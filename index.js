@@ -42,7 +42,7 @@ app.get('/districts', async (req, res) => {
   res.send(districts);
 });
 
-app.get('/upazilas', async (req, res) => {
+app.get('/upazilas',  async (req, res) => {
   const upazilas = await upazilasCollection.find().toArray();
   res.send(upazilas);
 });
